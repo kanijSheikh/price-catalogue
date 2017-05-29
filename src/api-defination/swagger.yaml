@@ -1,0 +1,45 @@
+---
+swagger: "2.0"
+info:
+  description: "This is the Pricing Service API for retreiving the products price"
+  version: "1.0.0"
+  title: "Pricing Service API"
+host: "localhost"
+basePath: "/http://localhost:8090"
+schemes:
+- "http"
+produces:
+- "application/json"
+paths:
+  /product/{productName}/price:
+    get:
+      tags:
+      - "Pricing Service API"
+      description: "Return a Price for given product name."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "productName"
+        in: "path"
+        description: "product name to query for Product Price"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Return a Price for given product name"
+          schema:
+            $ref: "#/definitions/Price"
+        400:
+          description: "Bad Request"
+        404:
+          description: "Entity Not found"
+        500:
+          description: "Internal Server Error"
+definitions:
+  Price:
+    type: "object"
+    properties:
+      productName:
+        type: "string"
+      price:
+        type: "string"
